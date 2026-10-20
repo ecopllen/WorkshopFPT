@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop Know Your Strengths · SSB Đại học FPT Đà Nẵng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="logo-area" onclick="app.navigate('home')">
+        <div class="logo-icon">S</div>
+        <div class="logo-text">
+          <h1>Know Your Strengths</h1>
+          <span>Strength Lab · FUDA</span>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a class="nav-link active" data-view="home" onclick="app.navigate('home')">Trang chủ</a></li>
+          <li><a class="nav-link" data-view="test" onclick="app.navigate('test')">Mini Test 15 câu</a></li>
+          <li><a class="nav-link" data-view="directory" onclick="app.navigate('directory')">Tìm Teammate</a></li>
+          <li><a class="nav-link" data-view="community" onclick="app.navigate('community')">Cộng đồng</a></li>
+          <li><a class="nav-link" data-view="profile" id="nav-profile-link" onclick="app.navigate('profile')">Hồ sơ của tôi</a></li>
+          <li id="nav-admin-item" style="display: none;"><a class="nav-link" data-view="admin" onclick="app.navigate('admin')">Quản trị Admin 👑</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-outline btn-sm" id="btn-theme-toggle" onclick="app.toggleTheme()">🌙</button>
+        <div id="auth-unauthenticated">
+          <button class="btn btn-primary btn-sm" onclick="app.openAuthModal('login')">Đăng nhập / Đăng ký</button>
+        </div>
+        <div id="auth-authenticated" style="display: none; align-items: center; gap: 10px;">
+          <div style="text-align: right; line-height: 1.2;">
+            <div id="user-display-name" style="font-weight: 700; font-size: 0.88rem;"></div>
+            <div id="user-role-badge" style="font-size: 0.72rem; color: var(--mute);"></div>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="app.logout()">Đăng xuất</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Areas -->
+  <main class="container">
+
+    <!-- VIEW 1: HOME / LANDING -->
+    <section id="view-home" class="view-section active">
+      <div class="hero-box">
+        <div class="hero-tag">Dự án môn SSB · Đại học FPT Đà Nẵng</div>
+        <h1>Khám phá điểm mạnh cá nhân &amp; Kết nối đồng đội đồ án</h1>
+        <p class="hero-lead">
+          Không gian giúp sinh viên nhận diện Strength chính và phụ, kiểm chứng năng lực qua thử thách nhóm và tìm kiếm những mảnh ghép lý tưởng cho đồ án tốt nghiệp.
+        </p>
+
+        <div class="hero-insight">
+          <span>Insight quan trọng: Potential ≠ Visibility</span>
+          <p style="margin: 0; font-size: 0.95rem; color: var(--ink-secondary);">
+            Có năng lực chưa đồng nghĩa người khác biết bạn có năng lực đó. Hãy để Know Your Strengths giúp bạn tỏa sáng!
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <button class="btn btn-primary btn-lg" onclick="app.startTest()">Bắt đầu bài Mini Test 15 câu 🚀</button>
+          <button class="btn btn-outline btn-lg" onclick="app.navigate('directory')">Khám phá Danh bạ Teammate 👥</button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <b>Đối tượng</b>
+            <p>Sinh viên FUDA năm 3–4</p>
+          </div>
+          <div class="stat-item">
+            <b>Quy mô workshop</b>
+            <p>30 sinh viên (6 nhóm × 5 người)</p>
+          </div>
+          <div class="stat-item">
+            <b>Mô hình 5 Điểm mạnh</b>
+            <p>5 vai trò đa dạng trong một nhóm</p>
+          </div>
+          <div class="stat-item">
+            <b>Phân nhóm thông minh</b>
+            <p>Đủ 5 thế mạnh khi khả thi</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-title">5 Kiểu Điểm Mạnh Trong Làm Việc Nhóm</h2>
+      <p class="section-desc">Mỗi cá nhân là một mảnh ghép độc bản. Khi kết hợp hài hòa cả 5 điểm mạnh, một nhóm đồ án sẽ phát huy tối đa sức mạnh sáng tạo và thực thi.</p>
+
+      <div class="strength-grid">
+        <div class="strength-card str-comm-border">
+          <span class="badge-strength badge-Communication">Communication</span>
+          <h3>Giao tiếp &amp; Kết nối</h3>
+          <div class="strength-role">Presenter · Đại diện nhóm</div>
+          <p>Truyền đạt rõ ràng, kết nối mọi người, làm cầu nối nội bộ và pitch dự án thuyết phục.</p>
+        </div>
+
+        <div class="strength-card str-creat-border">
+          <span class="badge-strength badge-Creativity">Creativity</span>
+          <h3>Sáng tạo &amp; Đổi mới</h3>
+          <div class="strength-role">Idea Generator · Khởi xướng</div>
+          <p>Nghĩ ra hướng đi mới, tạo nét riêng khác biệt, phá vỡ khuôn mẫu thông thường.</p>
+        </div>
+
+        <div class="strength-card str-res-border">
+          <span class="badge-strength badge-Research">Research</span>
+          <h3>Nghiên cứu &amp; Dữ liệu</h3>
+          <div class="strength-role">Data Keeper · Kiểm chứng</div>
+          <p>Tìm kiếm, đào sâu và kiểm chứng thông tin cẩn thận, lập luận dựa trên số liệu thực tế.</p>
+        </div>
+
+        <div class="strength-card str-lead-border">
+          <span class="badge-strength badge-Leadership">Leadership</span>
+          <h3>Lãnh đạo &amp; Điều phối</h3>
+          <div class="strength-role">Team Lead · Trưởng nhóm</div>
+          <p>Phân việc đúng người đúng việc, giữ tiến độ dự án, quyết đoán trước thời hạn deadline.</p>
+        </div>
+
+        <div class="strength-card str-prob-border">
+          <span class="badge-strength badge-Problem-solving">Problem-solving</span>
+          <h3>Giải quyết vấn đề</h3>
+          <div class="strength-role">Problem Solver · Tháo gỡ</div>
+          <p>Bình tĩnh khi gặp khó, tìm giải pháp thực tế, tối ưu nguồn lực và vượt qua trở ngại kỹ thuật.</p>
+        </div>
+      </div>
+
+      <!-- Workshop Flow Steps -->
+      <div style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow);">
+        <h2 class="section-title">Hành Trình Workshop "Strength Lab"</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 20px;">
+          <div style="border-left: 3px solid var(--fpt); padding-left: 12px;">
+            <b style="color: var(--fpt);">① Mini Test</b>
+            <p style="font-size: 0.88rem; color: var(--mute);">15 câu tình huống thực tế xác định Strength chính và phụ.</p>
+          </div>
+          <div style="border-left: 3px solid #d99a00; padding-left: 12px;">
+            <b style="color: #d99a00;">② Warm-up</b>
+            <p style="font-size: 0.88rem; color: var(--mute);">Phá băng, đặt tên slogan và nghe nhạc đoán bài.</p>
+          </div>
+          <div style="border-left: 3px solid #1e78d6; padding-left: 12px;">
+            <b style="color: #1e78d6;">③ Mini Challenge</b>
+            <p style="font-size: 0.88rem; color: var(--mute);">Giải bài toán ngân sách 1.000.000 VNĐ trong 10 phút &amp; pitch 5 phút.</p>
+          </div>
+          <div style="border-left: 3px solid #d92f2f; padding-left: 12px;">
+            <b style="color: #d92f2f;">④ Reflection</b>
+            <p style="font-size: 0.88rem; color: var(--mute);">Nhìn lại bản thân, hoàn thiện thẻ Strength Card cá nhân.</p>
+          </div>
+          <div style="border-left: 3px solid #22935a; padding-left: 12px;">
+            <b style="color: #22935a;">⑤ Team Connect</b>
+            <p style="font-size: 0.88rem; color: var(--mute);">Dán thẻ lên Strength Wall, chơi Bingo &amp; kết nối bạn mới.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: MINI TEST -->
+    <section id="view-test" class="view-section">
+      <div class="test-container">
+        <!-- Not Started Screen -->
+        <div id="test-intro-card" class="question-card" style="text-align: center;">
+          <span class="badge-strength badge-Communication" style="margin-bottom: 12px;">Bài Đánh Giá Năng Lực</span>
+          <h2>Mini Test 15 Câu Tình Huống Sinh Viên FUDA</h2>
+          <p style="color: var(--mute); max-width: 600px; margin: 12px auto 24px;">
+            15 tình huống thực tế thường gặp khi làm việc nhóm và đồ án tại Đại học FPT Đà Nẵng. Mỗi câu hỏi gồm 5 phản xạ tự nhiên tương ứng với 5 kiểu điểm mạnh. Hãy chọn phương án phản ánh đúng nhất cách hành xử thường ngày của bạn!
+          </p>
+          <div class="alert alert-info" style="text-align: left; max-width: 600px; margin: 0 auto 24px;">
+            <b>Quy tắc tính điểm:</b> Mỗi câu chọn 1 đáp án mang lại 1 điểm cho thế mạnh tương ứng. Tổng 5 thế mạnh luôn bằng đúng 15 điểm. Kết quả sẽ tự động chỉ ra <b>Strength Chính</b> và <b>Strength Phụ</b> của bạn.
+          </div>
+          <button class="btn btn-primary btn-lg" onclick="app.beginQuestionnaire()">Bắt đầu làm bài (15 câu) ⏱️</button>
+        </div>
+
+        <!-- Ongoing Questionnaire -->
+        <div id="test-active-card" style="display: none;">
+          <div class="progress-header">
+            <span style="font-weight: 700; color: var(--fpt);" id="question-counter">Câu hỏi 1 / 15</span>
+            <span style="font-size: 0.85rem; color: var(--mute);" id="question-progress-percent">0%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill" style="width: 6.66%;"></div>
+          </div>
+
+          <div class="question-card">
+            <div class="question-meta" id="q-title">Khởi động đồ án mới</div>
+            <h2 id="q-scenario">Tình huống đang tải...</h2>
+            <div class="options-list" id="q-options-container">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <button class="btn btn-outline" id="btn-prev-question" onclick="app.prevQuestion()">← Câu trước</button>
+            <button class="btn btn-primary" id="btn-next-question" onclick="app.nextQuestion()">Câu tiếp theo →</button>
+          </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="test-result-card" style="display: none;">
+          <div class="hero-box" style="text-align: center;">
+            <div class="badge-strength badge-Communication" style="margin-bottom: 12px;">Hoàn thành đánh giá</div>
+            <h1>Kết Quả Strength Card Của Bạn</h1>
+            <p class="hero-lead" style="margin: 0 auto 28px;">
+              Chúc mừng bạn đã hoàn thành 15 câu trắc nghiệm tình huống. Dưới đây là phân tích chi tiết thế mạnh của bạn:
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; text-align: left; margin-bottom: 32px;">
+              <!-- Primary Card -->
+              <div style="background: var(--surface-alt); border-radius: var(--radius); padding: 24px; border: 2px solid var(--fpt);">
+                <span class="badge-strength" id="res-primary-badge">PRIMARY</span>
+                <h2 id="res-primary-name" style="margin: 12px 0 4px; font-size: 1.4rem;">-</h2>
+                <div id="res-primary-role" style="font-weight: 700; color: var(--fpt); margin-bottom: 8px;">-</div>
+                <p id="res-primary-desc" style="font-size: 0.9rem; color: var(--mute);">-</p>
+              </div>
+
+              <!-- Secondary Card -->
+              <div style="background: var(--surface-alt); border-radius: var(--radius); padding: 24px; border: 2px solid var(--line);">
+                <span class="badge-strength" id="res-secondary-badge">SECONDARY</span>
+                <h2 id="res-secondary-name" style="margin: 12px 0 4px; font-size: 1.4rem;">-</h2>
+                <div id="res-secondary-role" style="font-weight: 700; color: var(--fpt); margin-bottom: 8px;">-</div>
+                <p id="res-secondary-desc" style="font-size: 0.9rem; color: var(--mute);">-</p>
+              </div>
+            </div>
+
+            <!-- Score breakdown bars -->
+            <div style="background: var(--surface-alt); border-radius: var(--radius); padding: 24px; margin-bottom: 32px; text-align: left;">
+              <h3 style="margin-bottom: 16px;">Phổ Điểm 5 Thế Mạnh (Tổng = 15 điểm)</h3>
+              <div id="score-breakdown-container" style="display: flex; flex-direction: column; gap: 12px;">
+                <!-- Rendered via JS -->
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+              <button class="btn btn-primary btn-lg" onclick="app.navigate('profile')">Hoàn thiện Hồ sơ &amp; Xuất bản danh bạ 👤</button>
+              <button class="btn btn-outline btn-lg" onclick="app.navigate('directory')">Xem Danh bạ Teammate 🔍</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: TEAMMATE DIRECTORY -->
+    <section id="view-directory" class="view-section">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <h2 class="section-title">Danh Bạ Tìm Teammate</h2>
+          <p class="section-desc" style="margin-bottom: 0;">Khám phá các bạn sinh viên cùng khóa, lọc theo thế mạnh cần tìm cho đề tài đồ án của bạn.</p>
+        </div>
+        <div id="demo-toggle-container" style="display: flex; align-items: center; gap: 8px; background: var(--surface); padding: 8px 14px; border-radius: var(--radius-sm); border: 1px solid var(--line);">
+          <input type="checkbox" id="check-include-demo" onchange="app.filterDirectory()">
+          <label for="check-include-demo" style="font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+            Bao gồm 30 hồ sơ mẫu (Demo profiles)
+          </label>
+        </div>
+      </div>
+
+      <div class="directory-toolbar">
+        <div class="filter-group">
+          <input type="text" id="dir-search" class="input-search" placeholder="Tìm theo tên, kỹ năng, đề tài quan tâm..." oninput="app.filterDirectory()">
+
+          <select id="dir-filter-strength" class="select-filter" onchange="app.filterDirectory()">
+            <option value="">-- Tất cả thế mạnh --</option>
+            <option value="Communication">Communication (Presenter)</option>
+            <option value="Creativity">Creativity (Idea Generator)</option>
+            <option value="Research">Research (Data Keeper)</option>
+            <option value="Leadership">Leadership (Team Lead)</option>
+            <option value="Problem-solving">Problem-solving (Problem Solver)</option>
+          </select>
+
+          <select id="dir-filter-status" class="select-filter" onchange="app.filterDirectory()">
+            <option value="">-- Tất cả trạng thái --</option>
+            <option value="Đang tìm teammate">Đang tìm teammate</option>
+            <option value="Đã có nhóm">Đã có nhóm</option>
+            <option value="Đang cân nhắc (đang có nhóm test thử)">Đang cân nhắc</option>
+          </select>
+
+          <select id="dir-filter-class" class="select-filter" onchange="app.filterDirectory()">
+            <option value="">-- Tất cả khóa --</option>
+            <option value="K16">K16</option>
+            <option value="K17">K17</option>
+            <option value="K18">K18</option>
+            <option value="K19">K19</option>
+          </select>
+        </div>
+
+        <div style="font-size: 0.88rem; color: var(--mute);">
+          Tìm thấy: <b id="dir-total-count" style="color: var(--fpt);">0</b> bạn
+        </div>
+      </div>
+
+      <div class="student-grid" id="directory-student-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 4: COMMUNITY BOARD -->
+    <section id="view-community" class="view-section">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <h2 class="section-title">Bảng Tin Cộng Đồng Đồ Án</h2>
+          <p class="section-desc" style="margin-bottom: 0;">Nơi thảo luận ý tưởng, đăng tin tuyển thành viên theo thế mạnh và chia sẻ kinh nghiệm.</p>
+        </div>
+        <button class="btn btn-primary" onclick="app.openCreatePostModal()">+ Đăng tin tuyển teammate</button>
+      </div>
+
+      <div id="community-posts-container" style="display: flex; flex-direction: column; gap: 20px; max-width: 860px; margin: 0 auto;">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 5: USER PROFILE & ONBOARDING -->
+    <section id="view-profile" class="view-section">
+      <div style="max-width: 900px; margin: 0 auto;">
+        <h2 class="section-title">Hồ Sơ &amp; Thiết Lập Quyền Riêng Tư</h2>
+        <p class="section-desc">Cập nhật thông tin đồ án, điểm mạnh và kiểm soát chặt chẽ những gì các bạn khác có thể nhìn thấy.</p>
+
+        <!-- Profile Onboarding Banner if not published -->
+        <div id="profile-unpublished-banner" class="alert alert-warning" style="display: none;">
+          <b>⚠️ Hồ sơ của bạn chưa xuất bản:</b> Hãy hoàn thiện thông tin và bật nút <i>"Xuất bản hồ sơ"</i> bên dưới để tên bạn hiển thị trong Danh bạ tìm teammate!
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+          <!-- Left: Profile Info Form -->
+          <div style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow);">
+            <h3 style="margin-bottom: 18px; border-bottom: 1px solid var(--line); padding-bottom: 8px;">Thông Tin Cá Nhân</h3>
+            <form id="form-profile" onsubmit="app.saveProfile(event)">
+              <div class="form-group">
+                <label>Họ và tên *</label>
+                <input type="text" id="prof-fullName" class="form-input" required>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div class="form-group">
+                  <label>Mã số sinh viên</label>
+                  <input type="text" id="prof-studentId" class="form-input" placeholder="DE17xxxx">
+                </div>
+                <div class="form-group">
+                  <label>Khóa / Năm học</label>
+                  <select id="prof-classYear" class="form-select">
+                    <option value="K17">K17</option>
+                    <option value="K18">K18</option>
+                    <option value="K16">K16</option>
+                    <option value="K19">K19</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Trạng thái tìm nhóm</label>
+                <select id="prof-teamStatus" class="form-select">
+                  <option value="Đang tìm teammate">Đang tìm teammate</option>
+                  <option value="Đang cân nhắc (đang có nhóm test thử)">Đang cân nhắc (đang có nhóm test thử)</option>
+                  <option value="Đã có nhóm">Đã có nhóm</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Vai trò mong muốn</label>
+                <input type="text" id="prof-desiredRole" class="form-input" placeholder="Team Lead, Presenter, Data Keeper...">
+              </div>
+
+              <div class="form-group">
+                <label>Giới thiệu ngắn (Bio)</label>
+                <textarea id="prof-bio" class="form-textarea" rows="3" placeholder="Chia sẻ phong cách làm việc, định hướng đề tài..."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Kỹ năng nổi bật (cách nhau bởi dấu phẩy)</label>
+                <input type="text" id="prof-skills" class="form-input" placeholder="Figma, React, Scrum, Presentation, Python">
+              </div>
+
+              <div class="form-group">
+                <label>Chủ đề đề tài quan tâm (cách nhau bởi dấu phẩy)</label>
+                <input type="text" id="prof-interests" class="form-input" placeholder="AI in Education, Green Campus, FinTech">
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <div class="form-group">
+                  <label>Số điện thoại liên hệ</label>
+                  <input type="text" id="prof-phone" class="form-input" placeholder="0905xxxxxx">
+                </div>
+                <div class="form-group">
+                  <label>Liên kết mạng xã hội (LinkedIn, GitHub)</label>
+                  <input type="text" id="prof-social" class="form-input" placeholder="https://linkedin.com/in/...">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">Lưu Thay Đổi Hồ Sơ 💾</button>
+            </form>
+          </div>
+
+          <!-- Right: Privacy & Visibility Controls -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- Privacy Card -->
+            <div style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow);">
+              <h3 style="margin-bottom: 14px; border-bottom: 1px solid var(--line); padding-bottom: 8px;">Cài Đặt Quyền Riêng Tư (Privacy)</h3>
+              <p style="font-size: 0.85rem; color: var(--mute); margin-bottom: 18px;">
+                Bạn có toàn quyền quyết định những thông tin nào được hiển thị cho các sinh viên khác trong trường.
+              </p>
+
+              <form id="form-privacy" onsubmit="app.savePrivacy(event)">
+                <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px;">
+                  <label class="form-checkbox">
+                    <input type="checkbox" id="priv-published">
+                    <span><b>Xuất bản hồ sơ (Publish Profile)</b>: Cho phép hồ sơ xuất hiện công khai trong hệ thống</span>
+                  </label>
+
+                  <label class="form-checkbox">
+                    <input type="checkbox" id="priv-dir-visible">
+                    <span><b>Hiển thị trong Danh bạ Teammate</b>: Các bạn khác có thể tìm thấy bạn qua bộ lọc</span>
+                  </label>
+
+                  <label class="form-checkbox">
+                    <input type="checkbox" id="priv-show-strengths">
+                    <span><b>Chia sẻ kết quả 5 Điểm mạnh</b>: Cho phép người khác nhìn thấy Strength Card của bạn</span>
+                  </label>
+
+                  <label class="form-checkbox">
+                    <input type="checkbox" id="priv-show-email">
+                    <span><b>Hiển thị Email</b> cho bạn bè cùng trường kết nối</span>
+                  </label>
+
+                  <label class="form-checkbox">
+                    <input type="checkbox" id="priv-show-phone">
+                    <span><b>Hiển thị Số điện thoại</b> liên hệ trực tiếp</span>
+                  </label>
+
+                  <label class="form-checkbox">
+                    <input type="checkbox" id="priv-show-social">
+                    <span><b>Hiển thị Liên kết Mạng xã hội / GitHub / LinkedIn</b></span>
+                  </label>
+                </div>
+
+                <div class="alert alert-info" style="font-size: 0.82rem; margin-bottom: 14px;">
+                  🛡️ <b>Cam kết bảo mật:</b> Câu trả lời chi tiết cho 15 câu hỏi của bạn luôn được mã hóa và không bao giờ chia sẻ cho bất kỳ ai khác.
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Cập Nhật Quyền Riêng Tư 🔒</button>
+              </form>
+            </div>
+
+            <!-- Strength Card Mini Preview -->
+            <div id="profile-strength-summary" style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow);">
+              <h3 style="margin-bottom: 14px;">Strength Card Hiện Tại</h3>
+              <div id="profile-strength-content">
+                <!-- Rendered via JS -->
+              </div>
+            </div>
+
+            <!-- Connection Requests -->
+            <div style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow);">
+              <h3 style="margin-bottom: 14px;">Lời Mời Kết Nối Teammate</h3>
+              <div id="connections-list">
+                <!-- Rendered via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 6: ADMIN DASHBOARD (Strict Server Guarded) -->
+    <section id="view-admin" class="view-section">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 14px;">
+        <div>
+          <span class="badge-strength badge-Leadership">Workshop Operations</span>
+          <h2 class="section-title">Quản Trị Workshop "Know Your Strengths" 👑</h2>
+          <p class="section-desc" style="margin-bottom: 0;">Bảng điều khiển dành riêng cho Quản trị viên dự án. Quản lý người tham gia, phân nhóm thông minh và giám sát dữ liệu.</p>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: center; background: var(--surface); padding: 10px 16px; border-radius: var(--radius); border: 1px solid var(--line);">
+          <input type="checkbox" id="admin-include-demo-toggle" onchange="app.toggleAdminDemoFilter()">
+          <label for="admin-include-demo-toggle" style="font-size: 0.88rem; font-weight: 700; cursor: pointer;">
+            Bao gồm dữ liệu Demo (30 hồ sơ mẫu)
+          </label>
+        </div>
+      </div>
+
+      <!-- Admin Tabs -->
+      <div class="tabs-nav">
+        <button class="tab-btn active" onclick="app.switchAdminTab('overview')">Tổng quan &amp; Số liệu</button>
+        <button class="tab-btn" onclick="app.switchAdminTab('grouping')">⚡ Phân Nhóm Thông Minh (5 Thế Mạnh)</button>
+        <button class="tab-btn" onclick="app.switchAdminTab('confirmed-teams')">Danh Sách Nhóm Đã Lưu</button>
+        <button class="tab-btn" onclick="app.switchAdminTab('participants')">Danh Sách Người Tham Gia</button>
+      </div>
+
+      <!-- Admin Tab: Overview -->
+      <div id="admin-tab-overview">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px;">
+          <div class="stat-item">
+            <b>Tổng Sinh Viên Đăng Ký</b>
+            <p id="adm-stat-students" style="font-size: 1.8rem; color: var(--fpt);">0</p>
+          </div>
+          <div class="stat-item">
+            <b>Đã Hoàn Thành Mini Test</b>
+            <p id="adm-stat-tests" style="font-size: 1.8rem; color: #1e78d6;">0</p>
+          </div>
+          <div class="stat-item">
+            <b>Số Nhóm Đã Xác Nhận</b>
+            <p id="adm-stat-teams" style="font-size: 1.8rem; color: #22935a;">0</p>
+          </div>
+          <div class="stat-item">
+            <b>Bài Thảo Luận Cộng Đồng</b>
+            <p id="adm-stat-posts" style="font-size: 1.8rem; color: #d99a00;">0</p>
+          </div>
+        </div>
+
+        <!-- Strength Distribution Breakdown -->
+        <div style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-bottom: 28px; box-shadow: var(--shadow);">
+          <h3 style="margin-bottom: 16px;">Phân Bố 5 Thế Mạnh Chính Trong Workshop</h3>
+          <div id="admin-strength-bars" style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+
+        <!-- Team Status Breakdown -->
+        <div style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow);">
+          <h3 style="margin-bottom: 16px;">Tình Trạng Tìm Nhóm Đồ Án</h3>
+          <div id="admin-status-breakdown" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+            <!-- Rendered via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tab: Intelligent Grouping -->
+      <div id="admin-tab-grouping" style="display: none;">
+        <div style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; box-shadow: var(--shadow);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 18px;">
+            <div>
+              <h3 style="font-size: 1.25rem; margin-bottom: 4px;">Thuật Toán Phân Nhóm Tối Ưu Đa Mục Tiêu</h3>
+              <p style="font-size: 0.88rem; color: var(--mute); margin: 0;">
+                Ưu tiên: 1. Gán 100% sinh viên; 2. Đều sĩ số; 3. Tối đa 5 thế mạnh chính khác nhau; 4. Giảm lặp; 5. Dùng thế mạnh phụ bù đắp.
+              </p>
+            </div>
+
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <div>
+                <label style="font-size: 0.8rem; font-weight: 700; display: block;">Số nhóm:</label>
+                <input type="number" id="group-team-count" value="6" min="1" max="20" style="width: 70px; padding: 6px; border: 1px solid var(--line); border-radius: 6px;">
+              </div>
+              <div>
+                <label style="font-size: 0.8rem; font-weight: 700; display: block;">Sĩ số mục tiêu:</label>
+                <input type="number" id="group-team-size" value="5" min="1" max="15" style="width: 70px; padding: 6px; border: 1px solid var(--line); border-radius: 6px;">
+              </div>
+              <button class="btn btn-primary btn-lg" onclick="app.generateProposedTeams()">🎲 Random nhóm</button>
+            </div>
+          </div>
+
+          <!-- Feasibility Warning Banner -->
+          <div id="grouping-feasibility-banner" class="alert alert-warning" style="display: none;">
+            <!-- Rendered via JS -->
+          </div>
+
+          <!-- Grouping Summary Metrics -->
+          <div id="grouping-metrics-summary" style="display: none; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; background: var(--surface-alt); padding: 16px; border-radius: 8px; margin-top: 14px;">
+            <div>
+              <span style="font-size: 0.78rem; color: var(--mute);">Tổng người tham gia:</span>
+              <div id="met-total-eligible" style="font-weight: 800; font-size: 1.2rem;">0</div>
+            </div>
+            <div>
+              <span style="font-size: 0.78rem; color: var(--mute);">Đã gán vào nhóm:</span>
+              <div id="met-total-assigned" style="font-weight: 800; font-size: 1.2rem; color: #22935a;">0</div>
+            </div>
+            <div>
+              <span style="font-size: 0.78rem; color: var(--mute);">Nhóm đủ 5 thế mạnh (5/5):</span>
+              <div id="met-perfect-teams" style="font-weight: 800; font-size: 1.2rem; color: var(--fpt);">0</div>
+            </div>
+            <div>
+              <span style="font-size: 0.78rem; color: var(--mute);">Nhóm có thế mạnh bị lặp:</span>
+              <div id="met-repeat-teams" style="font-weight: 800; font-size: 1.2rem; color: #d92f2f;">0</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Proposed Teams Grid -->
+        <div id="grouping-teams-container" class="grouping-dashboard">
+          <!-- Rendered via JS -->
+        </div>
+
+        <!-- Grouping Action Bar -->
+        <div id="grouping-action-bar" style="display: none; justify-content: flex-end; gap: 14px; margin-top: 24px; background: var(--surface); padding: 16px; border-radius: var(--radius); border: 1px solid var(--line);">
+          <button class="btn btn-outline" onclick="app.generateProposedTeams()">🔄 Tạo lại (Regenerate)</button>
+          <button class="btn btn-primary" onclick="app.confirmAndSaveTeams()">💾 Xác nhận và lưu nhóm</button>
+        </div>
+      </div>
+
+      <!-- Admin Tab: Confirmed Teams -->
+      <div id="admin-tab-confirmed-teams" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h3>Các Nhóm Workshop Chính Thức Đã Lưu</h3>
+          <button class="btn btn-outline btn-sm" onclick="app.exportWorkshopData('csv')">📥 Xuất file CSV phân nhóm</button>
+        </div>
+        <div id="confirmed-teams-container" class="grouping-dashboard">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+
+      <!-- Admin Tab: Participants Table -->
+      <div id="admin-tab-participants" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3>Danh Sách Sinh Viên Tham Gia</h3>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-outline btn-sm" onclick="app.exportWorkshopData('csv')">📥 Xuất CSV</button>
+            <button class="btn btn-outline btn-sm" onclick="app.exportWorkshopData('json')">📥 Xuất JSON</button>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);">
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: left;">
+            <thead>
+              <tr style="background: var(--surface-alt); border-bottom: 1px solid var(--line);">
+                <th style="padding: 12px 16px;">Sinh viên</th>
+                <th style="padding: 12px 16px;">Khóa</th>
+                <th style="padding: 12px 16px;">Email liên hệ</th>
+                <th style="padding: 12px 16px;">Strength Chính</th>
+                <th style="padding: 12px 16px;">Strength Phụ</th>
+                <th style="padding: 12px 16px;">Điểm số (C/Cr/R/L/P)</th>
+                <th style="padding: 12px 16px;">Trạng thái nhóm</th>
+                <th style="padding: 12px 16px;">Loại hồ sơ</th>
+              </tr>
+            </thead>
+            <tbody id="admin-participants-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- AUTH MODAL -->
+  <div class="modal-overlay" id="modal-auth">
+    <div class="modal-content">
+      <button class="modal-close" onclick="app.closeAuthModal()">✕</button>
+      <div style="text-align: center; margin-bottom: 20px;">
+        <div class="logo-icon" style="margin: 0 auto 10px; width: 44px; height: 44px;">S</div>
+        <h2 id="auth-modal-title">Đăng Nhập Nền Tảng</h2>
+        <p style="font-size: 0.88rem; color: var(--mute);">Dành cho sinh viên Đại học FPT Đà Nẵng (FUDA)</p>
+      </div>
+
+      <!-- Google OAuth Button -->
+      <button class="btn btn-outline" style="width: 100%; margin-bottom: 16px; border-color: #cbd5e1; display: flex; align-items: center; justify-content: center; gap: 10px;" onclick="app.signInWithGoogle()">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+        Đăng nhập với Google (@gmail.com / @fpt.edu.vn)
+      </button>
+
+      <div style="display: flex; align-items: center; gap: 10px; margin: 16px 0;">
+        <hr style="flex-grow: 1; border: 0; border-top: 1px solid var(--line);">
+        <span style="font-size: 0.78rem; color: var(--mute);">HOẶC XÁC THỰC EMAIL / MẬT KHẨU</span>
+        <hr style="flex-grow: 1; border: 0; border-top: 1px solid var(--line);">
+      </div>
+
+      <!-- Auth Tabs: Login vs Register -->
+      <div style="display: flex; gap: 8px; margin-bottom: 18px;">
+        <button id="btn-tab-login" class="btn btn-outline btn-sm" style="flex: 1;" onclick="app.setAuthTab('login')">Đăng nhập</button>
+        <button id="btn-tab-register" class="btn btn-outline btn-sm" style="flex: 1;" onclick="app.setAuthTab('register')">Đăng ký tài khoản</button>
+      </div>
+
+      <form id="form-auth" onsubmit="app.handleAuthSubmit(event)">
+        <div class="form-group" id="group-auth-name" style="display: none;">
+          <label>Họ và tên sinh viên *</label>
+          <input type="text" id="auth-fullName" class="form-input" placeholder="Ví dụ: Nguyễn Văn A">
+        </div>
+
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" id="auth-email" class="form-input" placeholder="tenban@gmail.com hoặc tenban@fpt.edu.vn" required>
+          <span style="font-size: 0.75rem; color: var(--mute); display: block; margin-top: 4px;">
+            Tên miền được phép: @gmail.com, @fpt.edu.vn, @fe.edu.vn
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label>Mật khẩu *</label>
+          <input type="password" id="auth-password" class="form-input" placeholder="Ít nhất 6 ký tự" required>
+        </div>
+
+        <button type="submit" id="btn-auth-submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+          Đăng Nhập
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- STUDENT DETAIL MODAL (Strict Privacy Respected) -->
+  <div class="modal-overlay" id="modal-student-detail">
+    <div class="modal-content" style="max-width: 640px;">
+      <button class="modal-close" onclick="app.closeStudentModal()">✕</button>
+      <div id="student-modal-body">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- REASSIGN MEMBER MODAL (Admin Team Grouping) -->
+  <div class="modal-overlay" id="modal-reassign">
+    <div class="modal-content" style="max-width: 440px;">
+      <button class="modal-close" onclick="app.closeReassignModal()">✕</button>
+      <h3 style="margin-bottom: 12px;">Điều Chuyển Thành Viên</h3>
+      <p id="reassign-modal-desc" style="font-size: 0.88rem; color: var(--mute); margin-bottom: 16px;">-</p>
+
+      <div class="form-group">
+        <label>Chọn nhóm chuyển đến:</label>
+        <select id="reassign-target-team" class="form-select">
+          <!-- Rendered via JS -->
+        </select>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+        <button class="btn btn-outline" onclick="app.closeReassignModal()">Hủy</button>
+        <button class="btn btn-primary" onclick="app.executeReassignment()">Xác nhận chuyển</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE POST MODAL -->
+  <div class="modal-overlay" id="modal-create-post">
+    <div class="modal-content">
+      <button class="modal-close" onclick="app.closeCreatePostModal()">✕</button>
+      <h3 style="margin-bottom: 16px;">Đăng Tin Tuyển Teammate Đồ Án</h3>
+      <form onsubmit="app.submitNewPost(event)">
+        <div class="form-group">
+          <label>Tiêu đề bài viết *</label>
+          <input type="text" id="post-title" class="form-input" placeholder="Ví dụ: Cần tìm 1 bạn Research &amp; 1 bạn Problem-solving cho đề tài Green Campus" required>
+        </div>
+
+        <div class="form-group">
+          <label>Thế mạnh nhóm đang cần tìm:</label>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <label class="form-checkbox"><input type="checkbox" name="post-str" value="Communication"> <span>Communication</span></label>
+            <label class="form-checkbox"><input type="checkbox" name="post-str" value="Creativity"> <span>Creativity</span></label>
+            <label class="form-checkbox"><input type="checkbox" name="post-str" value="Research"> <span>Research</span></label>
+            <label class="form-checkbox"><input type="checkbox" name="post-str" value="Leadership"> <span>Leadership</span></label>
+            <label class="form-checkbox"><input type="checkbox" name="post-str" value="Problem-solving"> <span>Problem-solving</span></label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Nội dung chi tiết *</label>
+          <textarea id="post-content" class="form-textarea" rows="4" placeholder="Mô tả ý tưởng dự án, tiến độ hiện tại, yêu cầu mong muốn ở teammate..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Đăng Bài Lên Cộng Đồng 🚀</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Application Script -->
+  <script src="/js/app.js"></script>
+</body>
+</html>

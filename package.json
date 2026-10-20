@@ -1,0 +1,20 @@
+{
+  "name": "know-your-strengths",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Know Your Strengths - Team Building & Strength Assessment Platform for FPT University Da Nang",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "seed": "node src/db/seed_demo.js",
+    "test": "node --test --test-concurrency=1 tests/*.test.js"
+  },
+  "keywords": [
+    "strength-finder",
+    "team-generation",
+    "fpt-university",
+    "ssb201"
+  ],
+  "author": "Know Your Strengths Team",
+  "license": "MIT"
+}
